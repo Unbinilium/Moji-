@@ -114,7 +114,6 @@ def phraser(src):
             i_before = i - 1;
             if i_before < 0:
                 i_before = 0
-                
             if c == '\"':
                 if segs[i_before] != '\\':
                     if not is_keep:
