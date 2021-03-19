@@ -6,7 +6,7 @@ import sys
 import codecs
 import hashlib
 
-MOJIPLUSPLUS_VERSION = 'v0.0.5'
+MOJIPLUSPLUS_VERSION = 'v0.0.6'
 CPP_COMPILER = 'g++'
 
 keywords_map = {
@@ -19,8 +19,6 @@ keywords_map = {
     u'💼': 'case',
     u'🚨': 'catch',
     u'🔥': 'char',
-    u'🔥16_t': 'char16_t',
-    u'🔥32_t': 'char32_t',
     u'🏫': 'class',
     u'💎': 'const',
     u'🗿': 'constexpr',
@@ -31,7 +29,7 @@ keywords_map = {
     u'♻': 'delete',
     u'👇': 'do',
     u'✌': 'double',
-    u'🎆_🎣': 'dynamic_cast',
+    u'🎆': 'dynamic',
     u'❔': 'else',
     u'📇': 'enum',
     u'💋': 'explicit',
@@ -59,11 +57,11 @@ keywords_map = {
     u'😈': 'reinterpret_cast',
     u'💩': 'return',
     u'🔬': 'short',
-    u'⊖': 'signed',
+    u'➖': 'signed',
     u'📏': 'sizeof',
     u'⚡️': 'static',
-    u'⚡_💂': 'static_assert',
-    u'⚡_🎣': 'static_cast',
+    u'💂': 'assert',
+    u'🎣': 'cast',
     u'🏠': 'struct',
     u'🤔': 'switch',
     u'💪': 'template',
@@ -81,7 +79,6 @@ keywords_map = {
     u'👻': 'using',
     u'😱': 'void',
     u'⛽️': 'volatile',
-    u'w🔥_t': 'wchar_t',
     u'🔁': 'while'
 }
 
