@@ -56,7 +56,7 @@ The moji++ AOT compiler actually call the cpp compiler after mpp source files tr
 |  char32_t  | 🔥32_t |    export    |   🚀   |  nullptr  |   ☠   |      switch      |   🤔   | volatile |   ⛽   |
 |   class    |   🏫   |    extern    |   🚪   | operator  |   💿   |     template     |   💪   | wchat_t  | w🔥_t  |
 |   const    |   💎   |    false     |   👎   |  private  |   🏩   |       this       |   👉   |  while   |   🔁   |
-| constexpr  |   🗿   |    float     |   ⛵   | protected |   🏦   |  `thread_local`  |   🎁   |          |       |
+| constexpr  |   🗿   |    float     |   ⛵   | protected |   🏦   |   thread_local   |   🎁   |          |       |
 | const_cast |   💣   |     for      |   🍀   |  public   |   ⛪   |      throw       |   🔈   |          |       |
 
 ## License
