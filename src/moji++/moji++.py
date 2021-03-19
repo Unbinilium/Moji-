@@ -1,3 +1,6 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+
 import os
 import sys
 import codecs
@@ -198,6 +201,7 @@ def main():
     handled_args, unhandled = handle_arguments(args)
     processed_files = compile_sources(handled_args, unhandled)
     clean_up(processed_files)
+    return 0
 
 if __name__ == '__main__':
     main()
