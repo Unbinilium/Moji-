@@ -6,7 +6,7 @@ import sys
 import codecs
 import hashlib
 
-MOJIPLUSPLUS_VERSION = 'v0.0.4'
+MOJIPLUSPLUS_VERSION = 'v0.0.5'
 CPP_COMPILER = 'g++'
 
 keywords_map = {
@@ -99,8 +99,8 @@ def import_sources(path):
         
 def phraser(src):
     phrased_src = []
+    is_keep = False
     for line in src:
-        is_keep = False
         segs = ''.join(line)
         phrased_line = {
             'to_trans': [],
@@ -114,15 +114,19 @@ def phraser(src):
             'line': []
         }
         for i, c in enumerate(segs):
+            i_before = i - 1;
+            if i_before < 0:
+                i_before = 0
+                
             if c == '\"':
-                if segs[i - 1] != '\\':
+                if segs[i_before] != '\\':
                     if not is_keep:
                         is_keep = True
                     else:
                         is_keep = False
             if not is_keep:
                 if c == '\'':
-                    if segs[i - 1] != '\\':
+                    if segs[i_before] != '\\':
                         if not is_keep:
                             is_keep = True
                         else:
@@ -225,14 +229,14 @@ def handle_arguments(args):
     }
     unhandled = []
     for arg in args:
+        arg_s = str(arg)
         for key in handled_args.keys():
-            if key == arg:
+            if arg_s in key:
                 if key != '-g':
                     handled_args[key] = True
                 else:
                     app_next = True
         if app_next:
-            arg_s = str(arg)
             if arg_s.split('.')[-1] == 'mpp':
                 handled_args['-g'].append(arg_s)
             else:
@@ -250,6 +254,8 @@ def handle_arguments(args):
     
 def main():
     args = sys.argv[1:]
+    if len(args) < 2:
+        args = "--help"
     handled_args, unhandled = handle_arguments(args)
     processed_files = compile_sources(handled_args, unhandled)
     clean_up(processed_files)
