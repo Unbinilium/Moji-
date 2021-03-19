@@ -6,7 +6,7 @@ import sys
 import codecs
 import hashlib
 
-MOJIPLUSPLUS_VERSION = 'v0.0.3'
+MOJIPLUSPLUS_VERSION = 'v0.0.4'
 CPP_COMPILER = 'g++'
 
 keywords_map = {
@@ -144,7 +144,7 @@ def phraser(src):
             final[type] += 1
         line = ''.join(final['line'])
         phrased_src.append(line)
-        print(line, end='')
+        print('\t' + line, end='')
     return phrased_src
         
         
