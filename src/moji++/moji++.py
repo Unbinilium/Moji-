@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
 import os
@@ -6,7 +6,7 @@ import sys
 import codecs
 import hashlib
 
-MOJIPLUSPLUS_VERSION = 'v0.0.2'
+MOJIPLUSPLUS_VERSION = 'v0.0.3'
 CPP_COMPILER = 'g++'
 
 keywords_map = {
@@ -97,12 +97,64 @@ def import_sources(path):
         print("Moji++: Failed to import sources -> '" + path + "'")
         exit(-1)
         
-def translate_sources(src, path, hash):
-    translate_src = list()
+def phraser(src):
+    phrased_src = []
     for line in src:
-        for key in keywords_map.keys():
-            line = line.replace(key, keywords_map[key])
-        translate_src.append(line)
+        is_keep = False
+        segs = ''.join(line)
+        phrased_line = {
+            'to_trans': [],
+            'transed': [],
+            'to_keep': [],
+            'index': []
+        }
+        final = {
+            'transed': 0,
+            'to_keep': 0,
+            'line': []
+        }
+        for i, c in enumerate(segs):
+            if c == '\"':
+                if segs[i - 1] != '\\':
+                    if not is_keep:
+                        is_keep = True
+                    else:
+                        is_keep = False
+            if not is_keep:
+                if c == '\'':
+                    if segs[i - 1] != '\\':
+                        if not is_keep:
+                            is_keep = True
+                        else:
+                            is_keep = False
+            if not is_keep:
+                phrased_line['to_trans'].append(c)
+                phrased_line['index'].append('transed')
+            else:
+                phrased_line['to_keep'].append(c)
+                phrased_line['index'].append('to_keep')
+        for trans in phrased_line['to_trans']:
+            for c in trans:
+                if c in keywords_map.keys():
+                    phrased_line['transed'].append(keywords_map[c])
+                else:
+                    phrased_line['transed'].append(c)
+        for type in phrased_line['index']:
+            final['line'].append(phrased_line[type][final[type]])
+            final[type] += 1
+        line = ''.join(final['line'])
+        phrased_src.append(line)
+        print(line, end='')
+    return phrased_src
+        
+        
+def translate_sources(src, path, hash):
+    try:
+        print("Moji++: Phrasing mpp sources to cpp -> ")
+        translate_src = phraser(src)
+    except OSError as err:
+        print("Moji++: Failed to Phrasing mpp sources to cpp -> " + err)
+        
     print("Moji++: Translate sources -> '" + path + " to " + hash + ".cpp'")
     return translate_src
     
