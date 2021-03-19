@@ -6,7 +6,7 @@ import sys
 import codecs
 import hashlib
 
-MOJIPLUSPLUS_VERSION = 'v0.0.6'
+MOJIPLUSPLUS_VERSION = 'v0.0.7'
 CPP_COMPILER = 'g++'
 
 keywords_map = {
@@ -88,10 +88,10 @@ def import_sources(path):
             src = f.readlines()
             enc = str(src).encode(encoding='utf-8')
             hash = hashlib.sha1(enc).hexdigest()
-            print("Moji++: Imported sources -> '" + path + "'")
+            print("Moji++: Imported sources -> ['" + path + "']")
             return src, enc, hash
     except OSError:
-        print("Moji++: Failed to import sources -> '" + path + "'")
+        print("Moji++: Failed to import sources -> ['" + path + "']")
         exit(-1)
         
 def phraser(src):
@@ -149,26 +149,23 @@ def phraser(src):
     return phrased_src
         
         
-def translate_sources(src, path, hash):
+def translate_sources(src, path, file_name):
     try:
         print("Moji++: Phrasing mpp sources to cpp -> ")
         translate_src = phraser(src)
     except OSError as err:
         print("Moji++: Failed to Phrasing mpp sources to cpp -> " + err)
-        
-    print("Moji++: Translate sources -> '" + path + " to " + hash + ".cpp'")
+    print("Moji++: Translate sources -> ['" + path + " >> " + file_name + "']")
     return translate_src
     
-def export_sources(translate_src, hash):
-    file_name = hash + ".cpp"
+def export_sources(translate_src, file_name):
     try:
         with codecs.open(file_name, 'w', encoding='utf-8') as f:
             for line in translate_src:
                 f.write(line)
-            print("Moji++: Exported sources -> '" + file_name + "'")
-            return file_name
-    except OSError:
-        print("Moji++: Failed to export translated sources -> '" + file + "'")
+            print("Moji++: Exported sources -> ['" + file_name + "']")
+    except OSError as err:
+        print("Moji++: Failed to export translated sources -> " + err)
         
 def clean_up(file_names):
     for file_name in file_names:
@@ -185,9 +182,10 @@ def process_files(file_pathes):
         print("Moji++: Processing mpp files -> " + str(file_pathes))
         for path in file_pathes:
             src, enc, hash = import_sources(path)
-            translate_src = translate_sources(src, path, hash)
-            file_name = export_sources(translate_src, hash)
-            processed_files.append(file_name)
+            abs_path = os.path.join(os.path.dirname(path), hash + '.cpp')
+            translate_src = translate_sources(src, path, abs_path)
+            export_sources(translate_src, abs_path)
+            processed_files.append(abs_path)
         print("Moji++: Processed mpp files -> " + str(file_pathes))
         return processed_files
     except OSError:
