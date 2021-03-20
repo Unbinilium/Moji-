@@ -8,7 +8,7 @@ Simply write source files extension with `.mpp` that can be compiled with **moji
 #include <iostream>
 📥 📛 std;
 🔢 main(🔢 argc, 🔥 ** argv) { 
-   cout << "Hello Emoji World!";
+   cout << "Hello Emoji 🌍!";
    💩 0;
 }
 ```
@@ -18,7 +18,7 @@ Then compile the source code and execute the binary. It’s okey to compile `.mp
 ```shell
 moji++ -g main.mpp -o main
 ./main
-> Hello Emoji World!
+> Hello Emoji 🌍!
 ```
 
 ## Get started
