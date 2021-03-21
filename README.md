@@ -59,7 +59,7 @@ It means this is not something like mojilang, that only C++. You can write code 
 |    char    |   🔥   |     enum     |   📇   |    new    |   👶   |   static_cast    |  ⚡_🎣  | virtual  |   👻   |
 |  char16_t  | 🔥16_t |   explicit   |   💋   | noexcept  |   🔇   |      struct      |   🏠   |   void   |   😱   |
 |  char32_t  | 🔥32_t |    export    |   🚀   |  nullptr  |   ☠   |      switch      |   🤔   | volatile |   ⛽   |
-|   class    |   🏫   |    extern    |   🚪   | operator  |   💿   |     template     |   💪   | wchat_t  | w🔥_t  |
+|   class    |   🏫   |    extern    |   🚪   | operator  |   💿   |     template     |   💪   | wchar_t  | w🔥_t  |
 |   const    |   💎   |    false     |   👎   |  private  |   🏩   |       this       |   👉   |  while   |   🔁   |
 | constexpr  |   🗿   |    float     |   ⛵   | protected |   🏦   |   thread_local   |   🎁   |          |       |
 | const_cast |   💣   |     for      |   🍀   |  public   |   ⛪   |      throw       |   🔈   |          |       |
